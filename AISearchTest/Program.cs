@@ -184,7 +184,7 @@ namespace AzureStorageContainerPrivateEndpointExample
             // Create the container if it does not already exist
             try
             {
-                containerClient.CreateIfNotExists(PublicAccessType.Blob);
+                containerClient.CreateIfNotExists();
                 Console.WriteLine($"[DATA SOURCE] Container '{containerName}' created successfully.");
             }
             catch (RequestFailedException ex)
@@ -240,7 +240,7 @@ namespace AzureStorageContainerPrivateEndpointExample
                 KeyPhraseExtractionSkill keyPhraseExtractionSkill = CreateKeyPhraseExtractionSkill();
 
                 // Create the skillset
-                Console.WriteLine("[SKILLSET] Creating or updating the SkillSet...");
+                Console.WriteLine("[SKILLSET] Creating or Updating the SkillSet...");
                 List<SearchIndexerSkill> skills = new List<SearchIndexerSkill>();
                 skills.Add(languageDetectionSkill);
                 //skills.Add(ocrSkill);
@@ -467,21 +467,19 @@ namespace AzureStorageContainerPrivateEndpointExample
             {
                 indexerClient.GetIndexer(indexerName);
                 indexerClient.DeleteIndexer(indexerName);
-
-                Console.WriteLine($"[INDEXER] Creating or updating the Indexer '{indexerName}'...");
             }
             catch (RequestFailedException ex) when (ex.Status == 404)
             {
-                Console.WriteLine($"[INDEXER] Cannot Create the Indexer '{indexerName}'...");
             }
 
             try
             {
                 indexerClient.CreateIndexer(indexer);
+                Console.WriteLine($"[INDEXER] Creating or Updating the Indexer '{indexerName}'...");
             }
             catch (RequestFailedException ex)
             {
-                Console.WriteLine($"[INDEXER] Failed to create the Indexer '{indexerName}'. Exception Message: {ex.Message}");
+                Console.WriteLine($"[INDEXER] Failed to Create the Indexer '{indexerName}'. Exception Message: {ex.Message}");
             }
 
             return indexer;
