@@ -1,6 +1,6 @@
 # Azure AI Search Test on C#
 
-Code to test Azure AI Search:
+Code to test Azure AI Search with Azure Storage Account Data Source:
 
 - Create an Index
 - Create a Data Source using Azure Storage Account
